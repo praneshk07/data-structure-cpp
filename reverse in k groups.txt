@@ -1,0 +1,40 @@
+
+    class Node
+    {
+    public:
+        int data;
+        Node *next;
+        Node(int data)
+        {
+            this->data = data;
+            this->next = NULL;
+        }
+    };
+
+
+Node* kReverse(Node* head, int k) {
+    
+    if(head==NULL)
+    {
+        return NULL;
+    }
+    int count=0;
+    Node* forward=NULL;
+    Node* curr=head;
+    Node* prev=NULL;
+    while(count!=k && curr!=NULL)
+    {
+        count++;
+        forward=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=forward;     
+    }
+    if(forward!=NULL)
+    {
+        head->next=kReverse(forward,k);
+    }
+    
+    return prev;
+    // Write your code here.
+}
